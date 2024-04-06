@@ -6,3 +6,22 @@ This project tackes this problem by adopting the "cloud continuum" paradigm (suc
 
 This project will heavily rely on Kubernetes (e.g., [K3d](https://github.com/k3d-io/k3d)) and [Liqo](https://liqo.io/) as building blocks, and it may require the creation of a minimal dashboard to facilitate the users in the edge-to-cloud interaction.
 
+## Verify your Inventory
+
+```bash
+ansible-inventory -i Ansible/Inventory/inventory.ini --list
+```
+
+## Ping the myhosts group in your inventory
+
+```bash
+ansible myhosts -m ping -i Ansible/Inventory/inventory.ini
+```
+
+## Execution
+
+### NOTICE: the users used in the two machine should have root privileges in order to work properly
+
+```bash
+ansible-playbook Ansible/Playbook/env-setup.yaml -i Ansible/Inventory/inventory.ini
+```

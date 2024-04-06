@@ -1,0 +1,21 @@
+---
+- name: Liqo Installation
+  hosts: myhosts
+  become: yes
+  gather_facts: true
+
+  pre_tasks:
+    - name : Get k3s version
+      ansible.builtin.command: k3s --version
+      register: k3s_version_output
+      changed_when: false
+      ignore_errors: true
+
+  roles:
+    - role: Prerequisites
+      when: k3s_version_output.rc != 0
+    - role: k3s
+      when: k3s_version_output.rc != 0
+    - role: Liqo
+  
+  
