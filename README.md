@@ -18,10 +18,22 @@ ansible-inventory -i Ansible/Inventory/inventory.ini --list
 ansible myhosts -m ping -i Ansible/Inventory/inventory.ini
 ```
 
-## Execution
+## Environment Setup
 
 ### NOTICE: the users used in the two machine should have root privileges in order to work properly
 
 ```bash
 ansible-playbook Ansible/Playbook/env-setup.yaml -i Ansible/Inventory/inventory.ini
+```
+
+## Liqo Peering
+
+```bash
+ansible-playbook Ansible/Playbook/liqo-peering.yaml -i Ansible/Inventory/inventory.ini
+```
+
+## DDNS Setup
+
+```bash
+ansible-playbook Ansible/Playbook/ddns-setup.yaml -i Ansible/Inventory/inventory.ini
 ```

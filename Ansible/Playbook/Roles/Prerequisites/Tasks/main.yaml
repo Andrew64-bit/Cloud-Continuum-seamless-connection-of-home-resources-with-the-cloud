@@ -35,6 +35,13 @@
         src: '{{ item }}'
       loop: "{{ (cluster_cidr + ',' + service_cidr) | split(',') }}"
 
+    - name: If ufw enables, allow 6443/tcp (Liqo)
+      when: ufw_status['stdout'] == "Stato':' attivo"
+      community.general.ufw:
+        rule: allow
+        port: 6443
+        proto: tcp      
+
 - name: Allow Firewalld Exceptions
   when:
     - ansible_facts.services['firewalld.service'] is defined
